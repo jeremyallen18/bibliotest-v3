@@ -1,0 +1,167 @@
+:root {
+    --primary: #ff2770;
+    --secondary: #45f3ff;
+    --dark: #1e1d2b;
+    --darker: #171625;
+    --light: #f8f9fa;
+    --card-bg: #2d2d39;
+    --success: #4ade80;
+}
+
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--dark), var(--darker));
+    color: var(--light);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    padding: 40px;
+    transition: margin-left 0.3s ease;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 28px;
+    color: var(--secondary);
+    text-shadow: 0 0 5px var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Grupos de formulario */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group input,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(69, 243, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: var(--light);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 2px rgba(69, 243, 255, 0.2);
+}
+
+.form-group textarea {
+    min-height: 200px;
+    resize: vertical;
+}
+
+/* Botones */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.submit-btn {
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    color: var(--success);
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: rgba(74, 222, 128, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 222, 128, 0.2);
+}
+
+.cancel-btn {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--primary);
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .main-content {
+        margin-left: 240px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    .form-actions {
+        flex-direction: column;
+    }
+}

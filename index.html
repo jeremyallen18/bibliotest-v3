@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Biblioteca</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="icon" href="icono/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div class="box">
+  <div class="login">
+    <!-- Texto inicial que desaparecerá -->
+    <div class="initial-text">
+      <p>Iniciar Sesión</p>
+      <div class="arrow-down">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+
+    <!-- Contenido principal que permanece visible -->
+    <div class="login-content">
+      <h2 class="login-title">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        Iniciar Sesión
+        <i class="fa-solid fa-heart"></i>
+      </h2>
+
+      <div class="loginBx">
+        <form action="login.php" method="POST">
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" placeholder="Contraseña" required>
+          </div>
+          <input type="submit" value="Ingresar">
+        </form>
+
+        <div class="group">
+          <a href="recuperar.php">¿Olvidaste tu contraseña?</a>
+          <a href="registro.php">Registrarse</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de administrador flotante -->
+    <a href="login_admin.php" class="admin-fab" title="Acceso Administrador">
+      <i class="fa-solid fa-user-shield"></i>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
