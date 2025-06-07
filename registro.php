@@ -40,7 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Registro Biblioteca</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link rel="icon" href="icono/favicon.ico" type="image/x-icon">
-  <style>
+  <link rel="stylesheet" href="css/estilo2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="preload" href="videos/background.mp4" as="video" type="video/mp4">
+  <!-- <style>
     * {
       margin: 0;
       padding: 0;
@@ -215,9 +218,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       font-weight: 500;
       margin-top: -10px;
     }
-  </style>
+  </style> -->
   </head>
 <body>
+    <div class="corner-images">
+    <img src="img\test.png" alt="Imagen izquierda" class="corner-img left-img">
+    <img src="img\isc.png" alt="Imagen derecha" class="corner-img right-img">
+  </div>
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="videos/background.mp4" type="video/mp4">
+      <!-- Fallback para navegadores antiguos -->
+      <source src="videos/background.webm" type="video/webm">
+    </video>
+  </div>
   <div class="box">
     <div class="login">
       <div class="loginBx">

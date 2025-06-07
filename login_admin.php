@@ -58,11 +58,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <title>Login Administrador</title>
-  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/estilo2.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="preload" href="videos/background.mp4" as="video" type="video/mp4">
 </head>
 <body>
-
+  <div class="corner-images">
+    <img src="img\test.png" alt="Imagen izquierda" class="corner-img left-img">
+    <img src="img\isc.png" alt="Imagen derecha" class="corner-img right-img">
+  </div>
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="videos/background.mp4" type="video/mp4">
+      <!-- Fallback para navegadores antiguos -->
+      <source src="videos/background.webm" type="video/webm">
+    </video>
+  </div>
 <div class="box">
   <div class="login">
     <!-- Texto inicial que desaparecerá -->

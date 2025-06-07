@@ -77,17 +77,17 @@ body {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.admin-menu {
+.menu-admin {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.admin-menu li {
+.menu-admin li {
   margin-bottom: 10px;
 }
 
-.admin-menu a {
+.menu-admin a {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -99,14 +99,14 @@ body {
   font-size: 15px;
 }
 
-.admin-menu a:hover,
-.admin-menu a.active {
+.menu-admin a:hover,
+.menu-admin a.active {
   background: rgba(69, 243, 255, 0.1);
   color: var(--secondary);
   box-shadow: 0 0 10px rgba(69, 243, 255, 0.2);
 }
 
-.admin-menu i {
+.menu-admin i {
   width: 24px;
   text-align: center;
   color: rgba(255, 255, 255, 0.6);

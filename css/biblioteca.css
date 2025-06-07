@@ -434,3 +434,12 @@ body {
     justify-content: center;
   }
 }
+.status-available {
+  color: green;
+  font-weight: bold;
+}
+
+.status-unavailable {
+  color: red;
+  font-weight: bold;
+}

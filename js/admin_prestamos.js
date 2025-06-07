@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Confirmación para bloquear usuario
-    function confirmBlock() {
+    function confirmar_bloqueo() {
         return confirm('¿Estás seguro de que deseas bloquear este usuario? El usuario no podrá acceder al sistema hasta que sea desbloqueado.');
     }
 
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const blockButtons = document.querySelectorAll('.block-btn');
     blockButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            if (!confirmBlock()) {
+            if (!confirmar_bloqueo()) {
                 e.preventDefault();
             }
         });
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Resaltar el enlace activo en el sidebar
     const currentPage = window.location.pathname.split('/').pop();
-    const menuLinks = document.querySelectorAll('.admin-menu a');
+    const menuLinks = document.querySelectorAll('.menu-admin a');
     
     menuLinks.forEach(link => {
         const linkPage = link.getAttribute('href');

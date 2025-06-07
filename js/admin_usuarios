@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Confirmación para bloquear usuario
-    function confirmBlock() {
+    function confirmar_el_bloqueo() {
         return confirm('¿Estás seguro de que deseas bloquear este usuario? El usuario no podrá acceder al sistema.');
     }
 
     // Confirmación para desbloquear usuario
-    function confirmUnblock() {
+    function confirmar_desbloqueo() {
         return confirm('¿Estás seguro de que deseas desbloquear este usuario? El usuario podrá acceder al sistema nuevamente.');
     }
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const blockButtons = document.querySelectorAll('.block-btn');
     blockButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            if (!confirmBlock()) {
+            if (!confirmar_el_bloqueo()) {
                 e.preventDefault();
             }
         });
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const unblockButtons = document.querySelectorAll('.unblock-btn');
     unblockButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            if (!confirmUnblock()) {
+            if (!confirmar_desbloqueo()) {
                 e.preventDefault();
             }
         });
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Resaltar el enlace activo en el sidebar
     const currentPage = window.location.pathname.split('/').pop();
-    const menuLinks = document.querySelectorAll('.admin-menu a');
+    const menuLinks = document.querySelectorAll('.menu-admin a');
     
     menuLinks.forEach(link => {
         const linkPage = link.getAttribute('href');

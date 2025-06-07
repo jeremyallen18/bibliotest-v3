@@ -1,5 +1,5 @@
 <?php
-$host = 'localhost';  // o tu servidor de base de datos
+$host = '127.0.0.1';  // servidor de base de datos
 $usuario = 'root';    // tu usuario de la base de datos
 $clave = '';          // tu contraseña de la base de datos
 $base_de_datos = 'biblioteca';  // nombre de la base de datos

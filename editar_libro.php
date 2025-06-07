@@ -32,8 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $titulo = trim($_POST['titulo']);
     $descripcion = trim($_POST['descripcion']);
     $imagen = trim($_POST['imagen']);
+    $cantidad = trim($_POST['cantidad_disponible']);
 
-    // Validación mejorada
+    // Validaciones
     if (empty($titulo)) {
         $error = 'El título es obligatorio';
     } elseif (strlen($titulo) > 120) {
@@ -44,17 +45,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = 'La descripción debe tener al menos 50 caracteres';
     } elseif (!filter_var($imagen, FILTER_VALIDATE_URL) && !empty($imagen)) {
         $error = 'La URL de la imagen no es válida';
+    } elseif (!is_numeric($cantidad) || intval($cantidad) < 0) {
+        $error = 'La cantidad debe ser un número entero mayor o igual a 0';
     } else {
+        $cantidad = intval($cantidad);
+
         // Actualizar el libro
-        $stmt = $conexion->prepare("UPDATE libros SET titulo = ?, descripcion = ?, imagen = ? WHERE id = ?");
-        $stmt->bind_param("sssi", $titulo, $descripcion, $imagen, $id);
-        
+        $stmt = $conexion->prepare("UPDATE libros SET titulo = ?, descripcion = ?, imagen = ?, cantidad_disponible = ? WHERE id = ?");
+        $stmt->bind_param("sssii", $titulo, $descripcion, $imagen, $cantidad, $id);
+
         if ($stmt->execute()) {
             $success = 'Libro actualizado correctamente';
             // Actualizar los datos mostrados
             $libro['titulo'] = $titulo;
             $libro['descripcion'] = $descripcion;
             $libro['imagen'] = $imagen;
+            $libro['cantidad_disponible'] = $cantidad;
         } else {
             $error = 'Error al actualizar el libro: ' . $conexion->error;
         }
@@ -63,18 +69,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Libro | Panel Administrativo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/editar_libro.css">
     <link rel="icon" href="icono/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
     <div class="admin-container">
         <div class="header">
@@ -101,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </button>
             </div>
         <?php endif; ?>
-        
+
         <?php if ($success): ?>
             <div class="alert alert-success animate__animated animate__fadeIn">
                 <div class="alert-icon">
@@ -123,10 +133,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="titulo">
                         <i class="fas fa-heading"></i> Título del Libro
                     </label>
-                    <input type="text" id="titulo" name="titulo" required 
-                           value="<?= htmlspecialchars($libro['titulo']) ?>"
-                           placeholder="Ingrese el título del libro" maxlength="120">
-                    <div class="form-hint"><span id="title-counter"><?= strlen($libro['titulo']) ?></span>/120 caracteres</div>
+                    <input type="text" id="titulo" name="titulo" required
+                        value="<?= htmlspecialchars($libro['titulo']) ?>" placeholder="Ingrese el título del libro"
+                        maxlength="120">
+                    <div class="form-hint"><span id="title-counter"><?= strlen($libro['titulo']) ?></span>/120
+                        caracteres</div>
                 </div>
 
                 <div class="form-group">
@@ -134,25 +145,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <i class="fas fa-align-left"></i> Descripción
                     </label>
                     <textarea id="descripcion" name="descripcion" rows="6" required
-                              placeholder="Escriba una descripción detallada del libro..."><?= htmlspecialchars($libro['descripcion']) ?></textarea>
-                    <div class="form-hint"><span id="desc-counter"><?= strlen($libro['descripcion']) ?></span> caracteres (mínimo 50)</div>
+                        placeholder="Escriba una descripción detallada del libro..."><?= htmlspecialchars($libro['descripcion']) ?></textarea>
+                    <div class="form-hint"><span id="desc-counter"><?= strlen($libro['descripcion']) ?></span>
+                        caracteres (mínimo 50)</div>
                 </div>
+
+                <div class="form-group">
+                    <label for="cantidad_disponible">
+                        <i class="fas fa-boxes"></i> Cantidad Disponible
+                    </label>
+                    <input type="number" id="cantidad_disponible" name="cantidad_disponible"
+                        value="<?= htmlspecialchars($libro['cantidad_disponible']) ?>" placeholder="Ej. 10" min="0"
+                        required>
+                    <div class="form-hint">Debe ser un número entero mayor o igual a 0</div>
+                </div>
+
 
                 <div class="form-group">
                     <label for="imagen">
                         <i class="fas fa-image"></i> URL de la Portada
                     </label>
-                    <input type="text" id="imagen" name="imagen" 
-                           value="<?= htmlspecialchars($libro['imagen']) ?>"
-                           placeholder="https://ejemplo.com/imagen.jpg"
-                           oninput="updatePreview(this.value)">
+                    <input type="text" id="imagen" name="imagen" value="<?= htmlspecialchars($libro['imagen']) ?>"
+                        placeholder="https://ejemplo.com/imagen.jpg" oninput="updatePreview(this.value)">
                     <div class="form-hint">Formato: URL válida (http:// o https://)</div>
                 </div>
 
                 <div class="image-preview-container">
                     <div id="image-preview" style="display: <?= !empty($libro['imagen']) ? 'block' : 'none' ?>;">
                         <?php if (!empty($libro['imagen'])): ?>
-                            <img src="<?= htmlspecialchars($libro['imagen']) ?>" alt="Portada actual del libro" class="preview-image">
+                            <img src="<?= htmlspecialchars($libro['imagen']) ?>" alt="Portada actual del libro"
+                                class="preview-image">
                             <div class="preview-overlay">
                                 <span>Vista previa</span>
                             </div>
@@ -186,22 +208,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         const titleCounter = document.getElementById('title-counter');
         const descInput = document.getElementById('descripcion');
         const descCounter = document.getElementById('desc-counter');
-        
-        titleInput.addEventListener('input', function() {
+
+        titleInput.addEventListener('input', function () {
             const length = this.value.length;
             titleCounter.textContent = length;
-            
+
             if (length > 100) {
                 titleCounter.style.color = '#f72585';
             } else {
                 titleCounter.style.color = '#6c757d';
             }
         });
-        
-        descInput.addEventListener('input', function() {
+
+        descInput.addEventListener('input', function () {
             const length = this.value.length;
             descCounter.textContent = length;
-            
+
             if (length < 50) {
                 descCounter.style.color = '#f72585';
             } else {
@@ -213,7 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         function updatePreview(url) {
             const preview = document.getElementById('image-preview');
             const noImage = document.getElementById('no-image');
-            
+
             if (url && isValidUrl(url)) {
                 preview.innerHTML = `
                     <img src="${url}" alt="Vista previa de la portada" class="preview-image">
@@ -228,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 noImage.style.display = 'flex';
             }
         }
-        
+
         function isValidUrl(string) {
             try {
                 new URL(string);
@@ -239,11 +261,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Validación del formulario
-        document.getElementById('bookForm').addEventListener('submit', function(e) {
+        document.getElementById('bookForm').addEventListener('submit', function (e) {
             const titulo = document.getElementById('titulo').value.trim();
             const descripcion = document.getElementById('descripcion').value.trim();
             const imagen = document.getElementById('imagen').value.trim();
-            
+
             if (!titulo) {
                 e.preventDefault();
                 Swal.fire({
@@ -254,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 });
                 return false;
             }
-            
+
             if (titulo.length > 120) {
                 e.preventDefault();
                 Swal.fire({
@@ -265,7 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 });
                 return false;
             }
-            
+
             if (!descripcion) {
                 e.preventDefault();
                 Swal.fire({
@@ -276,7 +298,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 });
                 return false;
             }
-            
+
             if (descripcion.length < 50) {
                 e.preventDefault();
                 Swal.fire({
@@ -287,7 +309,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 });
                 return false;
             }
-            
+
             if (imagen && !isValidUrl(imagen)) {
                 e.preventDefault();
                 Swal.fire({
@@ -298,7 +320,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 });
                 return false;
             }
-            
+
             // Mostrar loader al enviar
             Swal.fire({
                 title: 'Guardando cambios...',
@@ -308,7 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             });
         });
-        
+
         // Confirmación para eliminar libro
         function confirmDelete() {
             Swal.fire({
@@ -328,4 +350,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </script>
 </body>
+
 </html>

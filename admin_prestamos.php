@@ -9,7 +9,8 @@ require 'db.php';
 $query = "SELECT p.*, u.email as usuario_email, l.titulo as libro_titulo 
           FROM prestamos p 
           JOIN usuarios u ON p.usuario_id = u.id
-          JOIN libros l ON p.libro_id = l.id";
+          JOIN libros l ON p.libro_id = l.id
+          WHERE p.estado != 'Devuelto'";
 
 $result = $conexion->query($query);
 if (!$result) {
@@ -46,7 +47,7 @@ $result->free();
             </div>
         </div>
 
-        <ul class="admin-menu">
+        <ul class="menu-admin">
             <li><a href="admin_panel.php"><i class="fas fa-tachometer-alt"></i> Inicio</a></li>
             <li><a href="admin_libros.php"><i class="fas fa-book"></i> Libros</a></li>
             <li><a href="admin_noticias.php"><i class="fas fa-newspaper"></i> Noticias</a></li>

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Resaltar el enlace activo en el sidebar
     const currentPage = window.location.pathname.split('/').pop();
-    const menuLinks = document.querySelectorAll('.admin-menu a');
+    const menuLinks = document.querySelectorAll('.menu-admin a');
     
     menuLinks.forEach(link => {
         const linkPage = link.getAttribute('href');

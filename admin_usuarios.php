@@ -34,7 +34,7 @@ $usuarios = $result->fetch_all(MYSQLI_ASSOC);
             </div>
         </div>
 
-        <ul class="admin-menu">
+        <ul class="menu-admin">
             <li><a href="admin_panel.php"><i class="fas fa-tachometer-alt"></i> Inicio</a></li>
             <li><a href="admin_libros.php"><i class="fas fa-book"></i> Libros</a></li>
             <li><a href="admin_noticias.php"><i class="fas fa-newspaper"></i> Noticias</a></li>

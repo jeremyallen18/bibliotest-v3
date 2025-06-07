@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Efectos hover mejorados
+    // Efectos hover
     const buttons = document.querySelectorAll('.button, .action-btn');
     buttons.forEach(button => {
         button.addEventListener('mouseenter', function() {

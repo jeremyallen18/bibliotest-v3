@@ -1,5 +1,5 @@
 <?php
-// session_start(); // Opcional: si planeas usar mensajes flash y redirecciones más complejas
+// inicio_sesion(); // Opcional: si planeas usar mensajes flash y redirecciones más complejas
 require_once 'db.php';
 
 $page_title = "Resultado de Actualización";

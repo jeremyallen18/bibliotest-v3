@@ -6,8 +6,8 @@ if (!isset($_SESSION['admin_id'])) {
 }
 require 'db.php';
 
-$result = $conexion->query("SELECT * FROM libros");
-$libros = $result->fetch_all(MYSQLI_ASSOC);
+$resultado = $conexion->query("SELECT * FROM libros");
+$libros = $resultado->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ $libros = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
     <div class="admin-container">
-        <!-- Sidebar -->
+        <!-- Barra de navegacion -->
         <aside class="sidebar">
             <div class="admin-profile">
                 <div class="admin-avatar">
@@ -30,11 +30,11 @@ $libros = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
                 <div class="admin-info">
                     <h3>Administrador</h3>
-                    <p>Rol: Super Admin</p>
+                    <p>Bibliotest</p>
                 </div>
             </div>
 
-            <ul class="admin-menu">
+            <ul class="menu-admin">
                 <li><a href="admin_panel.php"><i class="fas fa-tachometer-alt"></i> Inicio</a></li>
                 <li><a href="admin_libros.php" class="active"><i class="fas fa-book"></i> Libros</a></li>
                 <li><a href="admin_noticias.php"><i class="fas fa-newspaper"></i> Noticias</a></li>

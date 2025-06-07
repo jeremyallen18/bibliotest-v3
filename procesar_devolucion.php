@@ -7,20 +7,60 @@ if (!isset($_SESSION['email'])) {
 
 include 'db.php';
 
-if (isset($_POST['devolver'])) {
-    $prestamo_id = $_POST['prestamo_id'];
+$mensaje = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['devolver'], $_POST['prestamo_id'])) {
+    $prestamo_id = intval($_POST['prestamo_id']); // Sanitizar ID
     $fecha_devolucion = date('Y-m-d');
 
-    $stmt = $conexion->prepare("UPDATE prestamos SET estado = 'Devuelto', fecha_devolucion = ? WHERE id = ?");
-    $stmt->bind_param('si', $fecha_devolucion, $prestamo_id);
+    if ($prestamo_id > 0) {
+        // Obtener el id_libro asociado al préstamo
+        $stmt = $conexion->prepare("SELECT libro_id FROM prestamos WHERE id = ? AND estado != 'Devuelto'");
+        if (!$stmt) {
+            die("Error en prepare SELECT: " . $conexion->error);
+        }
 
-    if ($stmt->execute()) {
-        $mensaje = "<div class='mensaje-exito'>Libro devuelto exitosamente!</div>";
+        $stmt->bind_param('i', $prestamo_id);
+        $stmt->execute();
+        $stmt->bind_result($id_libro);
+        if ($stmt->fetch()) {
+            $stmt->close();
+
+            // Actualizar estado del préstamo
+            $stmt = $conexion->prepare("UPDATE prestamos SET estado = 'Devuelto', fecha_devolucion = ? WHERE id = ?");
+            if (!$stmt) {
+                die("Error en prepare UPDATE prestamos: " . $conexion->error);
+            }
+
+            $stmt->bind_param('si', $fecha_devolucion, $prestamo_id);
+            if ($stmt->execute() && $stmt->affected_rows > 0) {
+                $stmt->close();
+
+                // Incrementar cantidad_disponible en libros
+                $stmt = $conexion->prepare("UPDATE libros SET cantidad_disponible = cantidad_disponible + 1 WHERE id = ?");
+                if (!$stmt) {
+                    die("Error en prepare UPDATE libros: " . $conexion->error);
+                }
+
+                $stmt->bind_param('i', $id_libro);
+                if ($stmt->execute()) {
+                    $mensaje = "<div class='mensaje-exito'>📘 ¡Libro devuelto exitosamente y cantidad actualizada!</div>";
+                } else {
+                    $mensaje = "<div class='mensaje-error'>❌ El libro fue devuelto pero no se pudo actualizar la cantidad disponible.</div>";
+                }
+                $stmt->close();
+
+            } else {
+                $mensaje = "<div class='mensaje-error'>❌ No se pudo actualizar el préstamo. Puede que ya esté devuelto o no exista.</div>";
+                $stmt->close();
+            }
+        } else {
+            $mensaje = "<div class='mensaje-error'>⚠️ Préstamo no encontrado o ya devuelto.</div>";
+            $stmt->close();
+        }
     } else {
-        $mensaje = "<div class='mensaje-error'>Error al devolver el libro.</div>";
+        $mensaje = "<div class='mensaje-error'>⚠️ ID de préstamo inválido.</div>";
     }
-
-    $stmt->close();
 }
 ?>
 

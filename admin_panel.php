@@ -38,7 +38,7 @@ session_regenerate_id(true); // Seguridad extra
                 </div>
             </div>
 
-            <ul class="admin-menu">
+            <ul class="menu-admin">
                 <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Inicio</a></li>
                 <li><a href="admin_libros.php"><i class="fas fa-book"></i> Libros</a></li>
                 <li><a href="admin_noticias.php"><i class="fas fa-newspaper"></i> Noticias</a></li>

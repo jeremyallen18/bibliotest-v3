@@ -45,6 +45,7 @@ $conexion->close();
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=PT+Serif:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/noticiasuser.css">
+    <!-- <link rel="stylesheet" href="css/noticias2.css"> -->
 </head>
 <body>
     <div class="nyt-container">
@@ -53,7 +54,13 @@ $conexion->close();
                 <div class="nyt-logo">
                     <span class="nyt-logo-text">Biblioteca Digital</span>
                 </div>
-                <div class="nyt-date"><?php echo date('l, F j, Y'); ?></div>
+                <div class="nyt-date">
+    <?php
+    setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'spanish');
+    echo utf8_encode(strftime('%A, %d de %B de %Y'));
+    ?>
+</div>
+
             </div>
             
             <nav class="nyt-nav">

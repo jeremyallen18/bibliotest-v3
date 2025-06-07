@@ -13,15 +13,40 @@ if (isset($_POST['confirmar'])) {
     $duracion = $_POST['duracion'];
     $fecha_devolucion = date('Y-m-d', strtotime("+$duracion months"));
 
-    $stmt = $conexion->prepare("INSERT INTO prestamos (usuario_id, libro_id, fecha_prestamo, fecha_devolucion, estado) VALUES (?, ?, NOW(), ?, 'Pendiente')");
-    $stmt->bind_param('iis', $usuario_id, $libro_id, $fecha_devolucion);
-
-    if ($stmt->execute()) {
-        $mensaje = "<p class='mensaje exito'>Préstamo solicitado con éxito. Fecha de devolución: $fecha_devolucion.</p>";
-    } else {
-        $mensaje = "<p class='mensaje error'>Error al solicitar el préstamo.</p>";
-    }
+    // Verificar si hay disponibilidad del libro
+    $stmt = $conexion->prepare("SELECT cantidad_disponible FROM libros WHERE id = ?");
+    $stmt->bind_param('i', $libro_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $libro = $result->fetch_assoc();
     $stmt->close();
+
+    if ($libro && $libro['cantidad_disponible'] > 0) {
+        // Hay ejemplares disponibles, proceder con el préstamo
+        $conexion->begin_transaction();
+
+        try {
+            // Insertar el préstamo
+            $stmt = $conexion->prepare("INSERT INTO prestamos (usuario_id, libro_id, fecha_prestamo, fecha_devolucion, estado) VALUES (?, ?, NOW(), ?, 'Pendiente')");
+            $stmt->bind_param('iis', $usuario_id, $libro_id, $fecha_devolucion);
+            $stmt->execute();
+            $stmt->close();
+
+            // Actualizar cantidad del libro
+            $stmt = $conexion->prepare("UPDATE libros SET cantidad_disponible = cantidad_disponible - 1 WHERE id = ?");
+            $stmt->bind_param('i', $libro_id);
+            $stmt->execute();
+            $stmt->close();
+
+            $conexion->commit();
+            $mensaje = "<p class='mensaje exito'>Préstamo solicitado con éxito. Fecha de devolución: $fecha_devolucion.</p>";
+        } catch (Exception $e) {
+            $conexion->rollback();
+            $mensaje = "<p class='mensaje error'>Error al procesar el préstamo.</p>";
+        }
+    } else {
+        $mensaje = "<p class='mensaje error'>El libro no está disponible actualmente. Por favor, intente más tarde.</p>";
+    }
 }
 ?>
 

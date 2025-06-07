@@ -26,7 +26,6 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar */
 .sidebar {
     width: 280px;
     background: rgba(30, 29, 43, 0.8);
@@ -40,9 +39,13 @@ body {
     transition: transform 0.3s ease;
 }
 
-.admin-profile {
+.admin-profile, .stat-card h3, .section-title {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.admin-profile {
     gap: 15px;
     margin-bottom: 40px;
     padding-bottom: 20px;
@@ -73,15 +76,17 @@ body {
     color: rgba(255, 255, 255, 0.7);
 }
 
-.admin-menu {
+.menu-admin {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.admin-menu li {
+.menu-admin li {
     margin-bottom: 10px;
 }
 
-.admin-menu a {
+.menu-admin a {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -93,14 +98,14 @@ body {
     font-size: 15px;
 }
 
-.admin-menu a:hover,
-.admin-menu a.active {
+.menu-admin a:hover,
+.menu-admin a.active {
     background: rgba(69, 243, 255, 0.1);
     color: var(--secondary);
     box-shadow: 0 0 10px rgba(69, 243, 255, 0.2);
 }
 
-.admin-menu i {
+.menu-admin i {
     width: 24px;
     text-align: center;
     color: rgba(255, 255, 255, 0.6);
@@ -129,7 +134,6 @@ body {
     box-shadow: 0 0 15px rgba(255, 39, 112, 0.3);
 }
 
-/* Main Content */
 .main-content {
     flex: 1;
     margin-left: 280px;
@@ -156,11 +160,14 @@ body {
     margin-bottom: 40px;
 }
 
-.stat-card {
+.stat-card, .quick-actions {
     background: var(--card-bg);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
     transition: transform 0.3s ease;
     border-left: 4px solid var(--secondary);
 }
@@ -173,10 +180,8 @@ body {
 .stat-card h3 {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
     gap: 8px;
+    margin-bottom: 10px;
 }
 
 .stat-card .value {
@@ -186,8 +191,6 @@ body {
 }
 
 .quick-actions {
-    background: var(--card-bg);
-    border-radius: 12px;
     padding: 30px;
     margin-bottom: 40px;
 }
@@ -196,9 +199,6 @@ body {
     font-size: 20px;
     margin-bottom: 20px;
     color: var(--light);
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .section-title i {
@@ -237,7 +237,6 @@ body {
     box-shadow: 0 5px 15px rgba(69, 243, 255, 0.2);
 }
 
-/* Responsive */
 @media (max-width: 992px) {
     .sidebar {
         width: 240px;
@@ -267,5 +266,5 @@ body {
 }
 
 .recent-placeholder {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
