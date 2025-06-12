@@ -247,6 +247,7 @@ if (isset($_POST['confirmar'])) {
                 <select name="duracion" id="duracion" required>
                     <option value="1">1 mes</option>
                     <option value="2">2 meses</option>
+                    <option value="3">1 semana</option>
                 </select>
                 <button type="submit" name="confirmar">Confirmar Solicitud</button>
             </form>

@@ -1,19 +1,18 @@
-/* Estilo NYT con fondo oscuro para vista de artículo */
+/* Estilo NYT con fondo claro para vista de artículo */
 :root {
     --primary: #326891;
     --primary-dark: #265e8a;
     --secondary: #6288a5;
     --accent: #dd3333;
     --cyan: #4cc9f0;
-    --bg-dark: #1a1a2e;
-    --bg-medium: #252432;
-    --bg-light: rgba(45, 45, 57, 0.8);
-    --bg-card: #1e1e28;
-    --text-light: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.7);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --bg-light: #ffffff;
+    --bg-medium: #f8f9fa;
+    --bg-card: #ffffff;
+    --text-dark: #333333;
+    --text-muted: #666666;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
     --border-radius: 8px;
     --transition: all 0.3s ease;
     --serif-font: 'PT Serif', 'Libre Baskerville', serif;
@@ -21,8 +20,8 @@
 }
 
 body {
-    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
-    color: var(--text-light);
+    background-color: var(--bg-medium);
+    color: var(--text-dark);
     font-family: var(--serif-font);
     line-height: 1.6;
     padding: 0;
@@ -55,7 +54,7 @@ body {
     font-family: var(--serif-font);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-light);
+    color: var(--primary-dark);
     border-bottom: 2px solid var(--primary);
     padding-bottom: 3px;
 }
@@ -73,8 +72,8 @@ body {
 
 .nyt-article-back {
     padding: 8px 16px;
-    background: rgba(76, 201, 240, 0.2);
-    color: var(--cyan);
+    background: rgba(76, 201, 240, 0.1);
+    color: var(--primary);
     border-radius: var(--border-radius);
     text-decoration: none;
     font-family: var(--sans-font);
@@ -83,12 +82,12 @@ body {
     align-items: center;
     gap: 8px;
     transition: var(--transition);
-    border: 1px solid var(--cyan);
+    border: 1px solid var(--primary);
 }
 
 .nyt-article-back:hover {
-    background: var(--cyan);
-    color: var(--bg-dark);
+    background: var(--primary);
+    color: white;
     transform: translateY(-2px);
 }
 
@@ -113,7 +112,7 @@ body {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 15px;
-    color: var(--text-light);
+    color: var(--text-dark);
 }
 
 .nyt-article-meta {
@@ -173,7 +172,7 @@ body {
 .nyt-article-content {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: var(--text-light);
+    color: var(--text-dark);
 }
 
 .nyt-article-content p {
@@ -202,13 +201,13 @@ body {
 }
 
 .nyt-article-share {
-    background: rgba(50, 104, 145, 0.2);
+    background: rgba(50, 104, 145, 0.1);
     color: var(--primary);
     border: 1px solid var(--primary);
 }
 
 .nyt-article-save {
-    background: rgba(221, 51, 51, 0.2);
+    background: rgba(221, 51, 51, 0.1);
     color: var(--accent);
     border: 1px solid var(--accent);
 }
@@ -248,7 +247,7 @@ body {
 .nyt-tag {
     padding: 4px 12px;
     background: rgba(76, 201, 240, 0.1);
-    color: var(--cyan);
+    color: var(--primary);
     border-radius: 20px;
     text-decoration: none;
     transition: var(--transition);
@@ -256,8 +255,8 @@ body {
 }
 
 .nyt-tag:hover {
-    background: var(--cyan);
-    color: var(--bg-dark);
+    background: var(--primary);
+    color: white;
 }
 
 /* Pie de página */
@@ -265,6 +264,7 @@ body {
     border-top: 2px solid var(--border-color);
     padding: 30px;
     margin-top: 50px;
+    background-color: var(--bg-medium);
 }
 
 .nyt-footer-content {

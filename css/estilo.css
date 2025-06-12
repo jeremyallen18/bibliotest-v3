@@ -12,8 +12,51 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #252432 0%, #1a1a24 100%);
   overflow: hidden;
+  position: relative;
+}
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000; /* Fondo negro para áreas no cubiertas por el video */
+}
+
+.video-background video {
+  width: auto;
+  height: auto;
+  max-width: 120%;
+  max-height: 120%;
+
+}
+
+.corner-images {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  z-index: 1000;
+  pointer-events: none; /* Permite hacer clic a través de las imágenes */
+}
+
+.corner-img {
+  height: 60px; /* Ajusta este valor según necesites */
+  width: auto;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.corner-img:hover {
+  opacity: 1;
 }
 
 @property --a {
@@ -78,9 +121,9 @@ body {
   content: "";
   position: absolute;
   inset: 4px;
-  background: #2d2d39;
+  background: rgba(45, 45, 57, 1); /* 100% visible (sin transparencia) */
   border-radius: 15px;
-  border: 8px solid #25252b;
+  border: 8px solid rgba(37, 37, 43, 1); /* 100% visible (sin transparencia) */
 }
 
 .login {
@@ -91,11 +134,11 @@ body {
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.3); /* Más transparente */
+  backdrop-filter: blur(10px); /* Aumentado el blur */
   z-index: 1000;
-  box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.3);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
   transition: all 0.5s ease;
 }
 

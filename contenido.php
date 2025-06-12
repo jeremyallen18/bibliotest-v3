@@ -63,7 +63,7 @@ $stmt->close();
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>Biblioteca Digital</title>
-  <link id='estilo-principal' rel='stylesheet' href='css/biblioteca3.css'>
+  <link id='estilo-principal' rel='stylesheet' href='css/biblioteca.css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="icon" href="icono/favicon.ico" type="image/x-icon">
 </head>
@@ -74,7 +74,7 @@ $stmt->close();
       <header class='library-header'>
         <div class='library-title'>
           <i class='fas fa-book'></i>
-          <span>Biblioteca Digital</span>
+          <span>Bibliotest</span>
         </div>
 
         <div class='header-actions'>
@@ -99,6 +99,10 @@ $stmt->close();
                 <span>Noticias</span>
               </button>
             </form>
+            <a href='biblioteca_digital.php' class='btn btn-secondary'>
+              <i class='fas fa-book-open'></i>
+              <span>Biblioteca Digital</span>
+            </a>
           </div>
 
           <div class='user-actions'>

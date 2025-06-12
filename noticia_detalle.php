@@ -60,12 +60,12 @@ function formatFecha($fecha)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($noticia['titulo']) ?> - Biblioteca Digital</title>
+    <title><?= htmlspecialchars($noticia['titulo']) ?> - Bibliotest</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=PT+Serif:wght@400;700&family=Roboto:wght@300;400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="css/noticia_detalle.css">
+    <link rel="stylesheet" href="css/noticia_detalle2.css" id="theme-style">
 </head>
 
 <body>
@@ -74,7 +74,7 @@ function formatFecha($fecha)
         <header class="nyt-article-header">
             <div class="nyt-article-header-content">
                 <div class="nyt-logo-small">
-                    <span>Biblioteca Digital</span>
+                    <span>Bibliotest</span>
                 </div>
                 <div class="nyt-article-date">
                     <?php
@@ -89,6 +89,9 @@ function formatFecha($fecha)
                     <i class="fas fa-arrow-left"></i>
                     Volver a noticias
                 </a>
+                <button id="theme-toggle" class="nyt-theme-toggle">
+                    <i class="fas fa-moon"></i> Modo Oscuro
+                </button>
             </nav>
         </header>
 
@@ -109,7 +112,7 @@ function formatFecha($fecha)
                                 <i class="far fa-calendar-alt"></i>
                                 Publicado el <?= formatFecha($noticia['fecha']) ?>
                             </span>
-                            <span class="nyt-article-category">Biblioteca Digital</span>
+                            <span class="nyt-article-category">Bibliotest</span>
                         </div>
                     </header>
 
@@ -118,7 +121,7 @@ function formatFecha($fecha)
                         <figure class="nyt-article-image">
                             <img src="/biblioteca/<?= htmlspecialchars($noticia['imagen_path']) ?>"
                                 alt="<?= htmlspecialchars($noticia['titulo']) ?>" class="nyt-article-img">
-                            <figcaption class="nyt-article-caption">Imagen relacionada con la noticia</figcaption>
+                            <figcaption class="nyt-article-caption">Imagen de la la noticia</figcaption>
                         </figure>
                     <?php endif; ?>
 
@@ -171,6 +174,7 @@ function formatFecha($fecha)
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/compartir.js"></script>
+    <script src="js/cambiar_tema.js"></script>
 </body>
 
 </html>
